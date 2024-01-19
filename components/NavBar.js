@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ export default function NavBar() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Link passHref href="/">
-          <Navbar.Brand>CHANGE ME</Navbar.Brand>
+          <Navbar.Brand>HipHop Pizza & Wings</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -23,8 +24,13 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
+            <Link passHref href="/orders">
+              <Nav.Link>View Orders</Nav.Link>
+            </Link><Link passHref href="../orders/new">
+              <Nav.Link>Start an Order</Nav.Link>
+            </Link>
             <Link passHref href="/delete-me">
-              <Nav.Link>Delete Me</Nav.Link>
+              <Nav.Link>View Revenue</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out

@@ -49,6 +49,12 @@ h1, h2{
   margin-bottom: 15px;
 }
 
+.heading{
+  color: aliceblue !important;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
 h3, h5, h4, p{
   color: black !important;
   margin-top: 10px;
@@ -104,4 +110,24 @@ h3, h5, h4, p{
 .home-screen{
   color: #fd7e14 !important;
   
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td {
+  color: aliceblue;
 }

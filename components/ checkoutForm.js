@@ -69,12 +69,12 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="subtotal">
-        <Form.Label>Subtotal</Form.Label>
+        <Form.Label className="heading">Subtotal:</Form.Label>
         <Form.Control type="text" readOnly value={`$${subtotal.toFixed(2)}`} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="tipAmount">
-        <Form.Label>Tip Amount</Form.Label>
+        <Form.Label className="heading">Tip Amount:</Form.Label>
         <Form.Control
           type="number"
           placeholder="Enter tip amount"
@@ -84,7 +84,7 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="paymentType">
-        <Form.Label>Select Payment Type</Form.Label>
+        <Form.Label className="heading">Select Payment Type:</Form.Label>
         <Form.Control
           as="select"
           value={paymentType}
@@ -100,7 +100,7 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="total">
-        <Form.Label>Total</Form.Label>
+        <Form.Label className="heading">Total:</Form.Label>
         <Form.Control type="text" readOnly value={`$${total.toFixed(2)}`} />
       </Form.Group>
 

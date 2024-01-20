@@ -60,6 +60,18 @@ const deleteOrder = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getClosedOrders = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/orders?status=closed`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
-  getOrders, getSingleOrder, createOrder, updateOrder, deleteOrder,
+  getOrders, getSingleOrder, createOrder, updateOrder, deleteOrder, getClosedOrders,
 };

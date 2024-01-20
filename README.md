@@ -22,7 +22,7 @@ Hip Hop Pizza POS System is a web-based Point of Sale (POS) application designed
 
 ## Screenshots and Video Walkthrough
 
-<!-- Add screenshots or GIFs of your application here. You can also include a link to a video walkthrough. -->
+<!-- Add screenshots and a video walkthrough. -->
 
 ## Getting Started
 

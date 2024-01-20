@@ -17,9 +17,19 @@ function Signin() {
         paddingBlock: '0 5rem',
       }}
     >
-      <h1>Hi there!</h1>
-      <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
+      <Button
+        type="button"
+        size="lg"
+        className="generic-btn"
+        onClick={signIn}
+        style={{
+          border: 'black, 1px, inset',
+          width: '300px',
+          justifySelf: 'center',
+          alignSelf: 'center',
+          borderRadius: '100px',
+        }}
+      >
         Sign In
       </Button>
     </div>

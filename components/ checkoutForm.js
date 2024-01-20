@@ -31,11 +31,7 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
     }
   }, [orderId]);
   const items = orderDetails.items || [];
-
-  // Calculate subtotal by summing up the prices of order items
   const subtotal = items.reduce((acc, item) => acc + parseFloat(item.price), 0);
-
-  // Calculate total by adding subtotal and tip amount
   const total = Number.isNaN(subtotal + parseFloat(tipAmount))
     ? 0
     : subtotal + parseFloat(tipAmount);
@@ -50,8 +46,6 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Perform calculations and update order details
     const tip = parseFloat(tipAmount) || 0;
     const orderTotal = subtotal + tip;
     const paymentTypeId = paymentType && paymentType.id;

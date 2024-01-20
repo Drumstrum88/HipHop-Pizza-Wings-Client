@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { registerUser } from '../utils/auth'; // Update with path to registerUserimport Button from 'react-bootstrap/Button';
+import { registerUser } from '../utils/auth';
 
 function RegisterForm({ user, updateUser }) {
   const [formData, setFormData] = useState({

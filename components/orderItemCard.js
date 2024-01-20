@@ -14,7 +14,7 @@ const OrderItemCard = ({ itemObj }) => {
         setItemName(itemDetails.name);
       } catch (error) {
         console.error('Error fetching item details', error);
-        // Handle error gracefully
+        console.warn('Item details not fetched');
       }
     };
     fetchItemName();
@@ -27,7 +27,6 @@ const OrderItemCard = ({ itemObj }) => {
       }
     } catch (error) {
       console.error('Error deleting item', error);
-      // Handle error gracefully
     }
   };
 

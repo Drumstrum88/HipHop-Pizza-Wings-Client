@@ -15,7 +15,7 @@ const createOrderItem = (payload) => new Promise((resolve, reject) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ ...payload, quantity: 1 }), // Include quantity
+    body: JSON.stringify({ ...payload, quantity: 1 }),
   })
     .then((response) => {
       console.warn('Response:', response);

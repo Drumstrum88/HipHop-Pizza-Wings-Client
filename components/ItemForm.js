@@ -12,17 +12,15 @@ const ItemForm = ({
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    // Fetch items when the component mounts
     getItems()
       .then((data) => setItems(data))
       .catch((error) => console.error('Error fetching items:', error));
-  }, []); // Empty dependency array ensures useEffect runs only once
+  }, []);
 
   const handleQuantityChange = (item) => {
     setFormInput((prevInput) => {
       const existingItemIndex = prevInput.findIndex((entry) => entry.item.id === item.id);
       if (existingItemIndex !== -1) {
-        // Increment quantity for existing item
         const updatedInput = [...prevInput];
         updatedInput[existingItemIndex] = {
           item,
@@ -30,29 +28,18 @@ const ItemForm = ({
         };
         return updatedInput;
       }
-      // Add new item to the input with a default quantity of 1
       return [...prevInput, { item, quantity: 1 }];
     });
   };
-
-  // Inside handleAddToOrder function in ItemForm.js
   const handleAddToOrder = (e) => {
     e.preventDefault();
-
-    // Filter out items with valid positive quantities
     const selectedItems = formInput
       .filter((entry) => Number.isInteger(entry.quantity) && entry.quantity > 0)
-      .map(({ item, quantity }) => ({ item: item.id, quantity })); // Include quantity
+      .map(({ item, quantity }) => ({ item: item.id, quantity }));
 
     console.warn('Selected Items:', selectedItems);
-
-    // Pass selectedItems to handleAddItems function
     handleAddItems(selectedItems);
-
-    // Clear the formInput state
     setFormInput(initialState);
-
-    // Close the modal
     handleClose();
   };
 

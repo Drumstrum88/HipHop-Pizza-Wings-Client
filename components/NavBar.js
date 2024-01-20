@@ -29,7 +29,7 @@ export default function NavBar() {
             </Link><Link passHref href="../orders/new">
               <Nav.Link>Start an Order</Nav.Link>
             </Link>
-            <Link passHref href="/delete-me">
+            <Link passHref href="revenue">
               <Nav.Link>View Revenue</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>

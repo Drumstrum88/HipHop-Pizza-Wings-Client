@@ -20,7 +20,7 @@ export default function OrderDetails() {
   const fetchOrderDetails = async () => {
     try {
       const res = await getSingleOrder(id);
-      console.warn('Order Details Response:', res); // Add this line
+      console.warn('Order Details Response:', res);
       setOrderDetails(res);
     } catch (error) {
       console.error('Error fetching order details', error);
@@ -58,13 +58,12 @@ export default function OrderDetails() {
   const handleAddItems = async (selectedItems) => {
     try {
       if (selectedItems.length > 0) {
-        const itemId = selectedItems[0].item; // Extract the first item ID
+        const itemId = selectedItems[0].item;
         await createOrderItem({ order: orderDetails.id, item: itemId });
         await fetchAllItems();
       }
     } catch (error) {
       console.error('Error adding items to order', error);
-      // Handle error appropriately
     }
     handleCloseItemForm();
   };
@@ -72,10 +71,9 @@ export default function OrderDetails() {
   const handleDeleteItem = async (item) => {
     try {
       await deleteOrderItem(item.id);
-      fetchAllItems(); // Refresh item data
+      fetchAllItems();
     } catch (error) {
       console.error('Error deleting item', error);
-      // Handle error appropriately
     }
   };
 

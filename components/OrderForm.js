@@ -26,7 +26,6 @@ function OrderForm({ obj }) {
   }, [obj]);
 
   useEffect(() => {
-    // Fetch Order Types on component mount
     // eslint-disable-next-line no-use-before-define
     fetchOrderTypes();
   }, []);
@@ -44,13 +43,11 @@ function OrderForm({ obj }) {
     const { name, value } = e.target;
 
     if (name === 'type') {
-      // Update the 'type' field with the selected type ID
       setFormInput((prevState) => ({
         ...prevState,
         type: value,
       }));
     } else {
-      // Handle other fields
       setFormInput((prevState) => ({
         ...prevState,
         [name]: value,
@@ -61,18 +58,14 @@ function OrderForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (user && user.uid) {
-      // Include UID in the order data
       const payload = { ...formInput, uid: user.uid };
 
       if (obj.id) {
-        // Update existing order
         updateOrder(payload).then(() => router.push(`/orders/${obj.id}`));
       } else {
-        // Create a new order
         createOrder(payload).then(() => router.push('/orders'));
       }
     } else {
-      // Handle the case when the user is not authenticated
       console.error('User not authenticated');
     }
   };

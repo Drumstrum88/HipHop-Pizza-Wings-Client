@@ -17,7 +17,7 @@ export default function OrderCard({ orderObj }) {
       <Card.Body>
         <Card.Title>{orderObj.name}</Card.Title>
         <Card.Text>
-          <p>Status: {orderObj.status}</p>
+          <h4>Status: {orderObj.status}</h4>
         </Card.Text>
         <Link href={`/orders/${orderObj.id}`} passHref>
           <Button variant="primary" className="viewBtn">View</Button>

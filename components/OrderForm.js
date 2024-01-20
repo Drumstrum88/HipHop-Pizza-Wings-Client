@@ -128,7 +128,7 @@ function OrderForm({ obj }) {
         </Form.Select>
       </FloatingLabel>
 
-      <Button type="submit" variant="dark">{obj.id ? 'Update' : 'Create'} Order</Button>
+      <Button className="generic-btn" type="submit" variant="dark">{obj.id ? 'Update' : 'Create'} Order</Button>
     </Form>
   );
 }

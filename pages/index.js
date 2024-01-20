@@ -13,10 +13,13 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <h1>Hello, {user.first_name}! </h1>
-      <Link passHref href="/orders">View Orders</Link>
-      <Link passHref href="../orders/new">Start an Order</Link>
-      <Link passHref href="/">View Revenue</Link>
+      <div className="home-screen">
+        <h1 className="home-screen">Hello, {user.first_name}! </h1>
+        <Link passHref className="btn" href="/orders">|View Orders|</Link>
+        <Link passHref href="../orders/new" className="home-btn"> Start an Order
+        </Link>
+        <Link passHref href="/" className="home-btn"> |View Revenue|</Link>
+      </div>
     </div>
   );
 }

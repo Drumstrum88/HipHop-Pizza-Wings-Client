@@ -9,7 +9,9 @@ export default function OrdersPage() {
   const getAllOrders = () => {
     getOrders()
       .then((data) => {
-        setOrders(data);
+        const openOrders = data.filter((order) => order.status !== 'closed');
+
+        setOrders(openOrders);
         setLoading(false);
       })
       .catch((error) => {
@@ -24,11 +26,11 @@ export default function OrdersPage() {
 
   return (
     <article>
-      <h2>Open Orders</h2>
+      <h2>Open Orders:</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="order-cards">
+        <div className="d-flex flex-wrap">
           {orders.map((order) => (
             <section key={order.id}>
               <OrderCard orderObj={order} />

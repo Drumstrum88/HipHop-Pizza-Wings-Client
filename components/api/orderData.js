@@ -25,7 +25,6 @@ const getSingleOrder = (id) => new Promise((resolve, reject) => {
 });
 
 const createOrder = (order) => new Promise((resolve, reject) => {
-  // Add 'cashier_id' to the order object
   const payload = { ...order, user: order.uid };
 
   fetch(`${clientCredentials.databaseURL}/orders`, {

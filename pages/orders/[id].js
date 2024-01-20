@@ -81,15 +81,16 @@ export default function OrderDetails() {
 
   return (
     <div>
-      <h2>Order Details</h2>
+      <h1>Order Details</h1>
       {orderDetails && (
         <>
-          <p>Order ID: {orderDetails.id}</p>
-          <h2>Customer Phone: {orderDetails.customer_phone}</h2>
-          <h2>Customer Email: {orderDetails.customer_email}</h2>
-          <h2>Status: {orderDetails.status}</h2>
-          <h2>Order Type: {orderDetails.type ? String(orderDetails.type.label) : 'N/A'}</h2>
-
+          <div className="head">
+            <h2>Order ID: {orderDetails.id}</h2>
+            <h2>Customer Phone: {orderDetails.customer_phone}</h2>
+            <h2>Customer Email: {orderDetails.customer_email}</h2>
+            <h2>Status: {orderDetails.status}</h2>
+            <h2>Order Type: {orderDetails.type ? String(orderDetails.type.label) : 'N/A'}</h2>
+          </div>
         </>
       )}
 
@@ -102,10 +103,10 @@ export default function OrderDetails() {
           <p>No items available for this order.</p>
         )}
       </div>
+      <Button className="generic-btn" onClick={handleShowItemForm}>Add/Edit Items</Button>
 
-      <Button onClick={handleShowItemForm}>Add/Edit Items</Button>
-      <Link href="/components/payment" passHref>
-        <Button>Checkout</Button>
+      <Link href={`../orders/checkout/${id}`} passHref>
+        <Button className="generic-btn">Checkout</Button>
       </Link>
 
       <ItemForm

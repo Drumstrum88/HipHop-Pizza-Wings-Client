@@ -18,5 +18,90 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-image: url(https://img.freepik.com/premium-vector/dark-black-abstract-flat-urban-street-art-graffiti-style-vector-illustration-template-background_214056-1249.jpg?size=626&ext=jpg&ga=GA1.1.1396959625.1698502041&semt=ais);
+  background-color: black;
+  
+}
+
+.head {
+  max-width: auto;
+  text-align: center;
+  border-top: black, solid, 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  margin-top: auto;
+  font-size: x-large;
+  color: aliceblue;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+h1, h2{
+  color: aliceblue !important;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+h3, h5, h4, p{
+  color: black !important;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.d-flex {
+  background-image: url(https://img.freepik.com/premium-vector/graffiti-street-art-seamless-pattern_637842-20.jpg?size=626&ext=jpg&ga=GA1.2.1396959625.1698502041&semt=ais);
+  box-shadow: rgb(108, 136, 204) 0px 5px 10px;
+  flex: 0 0 calc(33.33% - 20px);
+  border-radius: 2%;
+  border: black solid 1px;
+  display: flex;
+  flex-direction: wrap;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+
+.carCard, .order-cards{
+  background-image: url(https://img.freepik.com/free-photo/gray-wall-with-marks-bottom_1187-1682.jpg?size=626&ext=jpg&ga=GA1.2.1396959625.1698502041&semt=ais) !important;
+  box-shadow: rgb(58, 58, 58) 0px 5px 10px;
+  flex: 0 0 calc(33.33% - 20px);
+  border-radius: 2%;
+  border: black solid 1px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  color: inherit;
+  margin: 10px;
+}
+
+.btn {
+  color: black !important;
+  background-color: inherit !important;
+  border-color: inherit !important;
+  margin: 10px;
+}
+
+.btn:hover{
+  color:inherit !important;
+  background-color: #fd7e14 !important;
+  border-color: #fd7e14 !important;
+}
+
+.generic-btn{
+  color:inherit !important;
+  background-color: #fd7e14 !important;
+  border-color: #fd7e14 !important;
+}
+
+.home-screen{
+  color: #fd7e14 !important;
+  
 }

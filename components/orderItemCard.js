@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { deleteOrderItem } from './api/orderItemData';
 import { getSingleItem } from './api/itemData';
 
-const OrderItemCard = ({ itemObj }) => {
+const OrderItemCard = ({ itemObj, setChange }) => {
   const [itemName, setItemName] = useState('');
   useEffect(() => {
     const fetchItemName = async () => {
@@ -23,7 +23,7 @@ const OrderItemCard = ({ itemObj }) => {
     try {
       if (window.confirm('Delete item?')) {
         await deleteOrderItem(itemObj.id);
-        window.location.reload();
+        setChange((prevState) => !prevState);
       }
     } catch (error) {
       console.error('Error deleting item', error);
@@ -35,8 +35,8 @@ const OrderItemCard = ({ itemObj }) => {
       <Card.Body>
         <Card.Title>{String(itemName)}</Card.Title>
 
-        <h4>Price: $ {String(itemObj.price)}</h4>
-        <h4>Quantity: {String(itemObj.quantity)}</h4>
+        <h4>Price: $ {itemObj.price}</h4>
+        <h4>Quantity: {itemObj.quantity}</h4>
         <Button variant="danger" onClick={deleteThisItem}>Delete</Button>
       </Card.Body>
     </Card>
@@ -46,11 +46,12 @@ const OrderItemCard = ({ itemObj }) => {
 OrderItemCard.propTypes = {
   itemObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     quantity: PropTypes.number.isRequired,
     item: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
+  setChange: PropTypes.func.isRequired,
 };
 
 export default OrderItemCard;

@@ -5,10 +5,13 @@ import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { deleteOrder } from './api/orderData';
 
-export default function OrderCard({ orderObj }) {
+export default function OrderCard({ orderObj, setChange }) {
+  console.warn('orderObj:', orderObj);
   const deleteThisOrder = () => {
     if (window.confirm('Delete order?')) {
-      deleteOrder(orderObj.id);
+      deleteOrder(orderObj.id).then(() => {
+        setChange((prevState) => !prevState);
+      });
     }
   };
 
@@ -17,7 +20,7 @@ export default function OrderCard({ orderObj }) {
       <Card.Body>
         <Card.Title>{orderObj.name}</Card.Title>
         <Card.Text>
-          <h4>Status: {orderObj.status}</h4>
+          Status: {orderObj.status}
         </Card.Text>
         <Link href={`/orders/${orderObj.id}`} passHref>
           <Button variant="primary" className="viewBtn">View</Button>
@@ -33,12 +36,13 @@ export default function OrderCard({ orderObj }) {
 
 OrderCard.propTypes = {
   orderObj: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.object]).isRequired,
     name: PropTypes.string,
     closed: PropTypes.bool,
     status: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     customer_phone: PropTypes.string,
     customer_email: PropTypes.string,
   }).isRequired,
+  setChange: PropTypes.func.isRequired,
 };

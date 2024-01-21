@@ -66,7 +66,7 @@ const ItemForm = ({
               </Form.Group>
             ))
           ) : (
-            <p>No items available.</p>
+            <h4>No items available.</h4>
           )}
         </Form>
       </Modal.Body>

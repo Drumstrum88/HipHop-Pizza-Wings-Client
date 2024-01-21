@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { getSingleOrder } from '../../components/api/orderData';
@@ -16,6 +17,7 @@ export default function OrderDetails() {
   const [loading, setLoading] = useState(true);
   const [allItems, setAllItems] = useState([]);
   const [showItemForm, setShowItemForm] = useState(false);
+  const [change, setChange] = useState(true);
 
   const fetchOrderDetails = async () => {
     try {
@@ -45,7 +47,7 @@ export default function OrderDetails() {
       fetchAllItems();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, change]);
 
   const handleShowItemForm = () => {
     setShowItemForm(true);
@@ -71,7 +73,7 @@ export default function OrderDetails() {
   const handleDeleteItem = async (item) => {
     try {
       await deleteOrderItem(item.id);
-      fetchAllItems();
+      setChange((prevState) => !prevState);
     } catch (error) {
       console.error('Error deleting item', error);
     }
@@ -83,7 +85,7 @@ export default function OrderDetails() {
       {orderDetails && (
         <>
           <div className="head">
-            <h2>Order ID: {orderDetails.id}</h2>
+            <h2>Order ID: {orderDetails.name}</h2>
             <h2>Customer Phone: {orderDetails.customer_phone}</h2>
             <h2>Customer Email: {orderDetails.customer_email}</h2>
             <h2>Status: {orderDetails.status}</h2>
@@ -95,12 +97,24 @@ export default function OrderDetails() {
       <div className="d-flex flex-wrap">
         {allItems && allItems.length > 0 ? (
           allItems.map((item) => (
-            <OrderItemCard key={item.id} itemObj={item} onDeleteItem={() => handleDeleteItem(item)} />
+            <OrderItemCard
+              key={item.id}
+              itemObj={{
+                ...item,
+                item: String(item.item),
+                price: String(item.price),
+                name: item.name || 'Guest',
+              }}
+              onDeleteItem={() => handleDeleteItem(item)}
+              setChange={setChange}
+            />
           ))
         ) : (
-          <p>No items available for this order.</p>
+          <h2>No items available for this order.</h2>
         )}
+
       </div>
+
       <Button className="generic-btn" onClick={handleShowItemForm}>Add/Edit Items</Button>
 
       <Link href={`../orders/checkout/${id}`} passHref>

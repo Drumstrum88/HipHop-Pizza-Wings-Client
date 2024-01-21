@@ -39,17 +39,27 @@ const createOrder = (order) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateOrder = (order) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/orders/${order.id}`, {
+const updateOrder = (payload) => new Promise((resolve, reject) => {
+  const typeId = payload.type && typeof payload.type === 'object' ? payload.type.id : null;
+
+  fetch(`http://localhost:8000/orders/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(order),
+    body: JSON.stringify({
+      ...payload,
+      type: typeId,
+    }),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => resolve(data))
-    .catch(reject);
+    .catch((error) => reject(error));
 });
 
 const deleteOrder = (id) => new Promise((resolve, reject) => {

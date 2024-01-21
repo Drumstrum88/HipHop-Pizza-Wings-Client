@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import { getPaymentTypes } from './api/payementData';
-import { getSingleOrder } from './api/orderData';
+import { getSingleOrder, updateOrder } from './api/orderData';
 
-const CheckoutForm = ({ orderId, handleCheckout }) => {
+const CheckoutForm = ({ orderId }) => {
   const [tipAmount, setTipAmount] = useState('');
-  const [paymentType, setPaymentType] = useState('');
+  const [paymentType, setPaymentType] = useState(0);
   const [paymentTypes, setPaymentTypes] = useState([]);
   const [orderDetails, setOrderDetails] = useState({});
+  const router = useRouter();
 
   const fetchPaymentTypes = async () => {
     try {
@@ -30,6 +32,7 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
         .catch((error) => console.error('Error fetching order details', error));
     }
   }, [orderId]);
+
   const items = orderDetails.items || [];
   const subtotal = items.reduce((acc, item) => acc + parseFloat(item.price), 0);
   const total = Number.isNaN(subtotal + parseFloat(tipAmount))
@@ -37,27 +40,66 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
     : subtotal + parseFloat(tipAmount);
 
   const handleTipChange = (e) => {
-    setTipAmount(e.target.value);
+    const inputValue = e.target.value;
+    const numericValue = parseFloat(inputValue);
+
+    setTipAmount(Number.isNaN(numericValue) ? 0 : numericValue);
   };
 
   const handlePaymentTypeChange = (e) => {
-    setPaymentType(e.target.value);
+    const selectedPaymentTypeId = e.target.value;
+    console.warn('Selected Payment Type ID:', selectedPaymentTypeId);
+    const paymentTypeId = Number(selectedPaymentTypeId);
+
+    setPaymentType(paymentTypeId);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!paymentType) {
+      alert('Please select a payment type.');
+      return;
+    }
+
     const tip = parseFloat(tipAmount) || 0;
     const orderTotal = subtotal + tip;
-    const paymentTypeId = paymentType && paymentType.id;
-    const orderTypeId = orderDetails.type && orderDetails.type.id;
-    handleCheckout({
+
+    const typeId = orderDetails.type && typeof orderDetails.type === 'object' ? orderDetails.type.id : null;
+    if (!orderDetails || !orderDetails.id) {
+      console.error('Invalid order details:', orderDetails);
+      alert('Failed to update order. Please try again.');
+      return;
+    }
+
+    const checkoutData = {
       tip,
-      payment: paymentTypeId,
-      type: orderTypeId,
+      payment: paymentType,
+      type: typeId,
       is_closed: true,
       status: 'closed',
-      total: orderTotal,
-    });
+      total: orderTotal.toFixed(2),
+      date: orderDetails.date,
+    };
+    console.warn('Checkout Data:', checkoutData);
+
+    try {
+      const updatedOrder = await updateOrder({
+        ...orderDetails,
+        id: orderDetails.id,
+        status: 'closed',
+        name: orderDetails.name,
+        customer_phone: orderDetails.customer_phone,
+        customer_email: orderDetails.customer_email,
+        type: orderDetails.type.id,
+        ...checkoutData,
+      });
+      alert('Order submitted successfully!');
+      router.push('/orders');
+      console.warn('Updated Order:', updatedOrder);
+    } catch (error) {
+      console.error('Error updating order:', error);
+      alert('Failed to update order. Please try again.');
+    }
   };
 
   return (
@@ -105,7 +147,6 @@ const CheckoutForm = ({ orderId, handleCheckout }) => {
 
 CheckoutForm.propTypes = {
   orderId: PropTypes.string.isRequired,
-  handleCheckout: PropTypes.func.isRequired,
 };
 
 export default CheckoutForm;

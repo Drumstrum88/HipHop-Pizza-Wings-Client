@@ -41,11 +41,11 @@ function OrderForm({ obj }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     if (name === 'type') {
+      const orderTypeId = value ? parseInt(value, 10) : null;
       setFormInput((prevState) => ({
         ...prevState,
-        type: value,
+        type: orderTypeId,
       }));
     } else {
       setFormInput((prevState) => ({

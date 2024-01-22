@@ -14,7 +14,6 @@ const OrderItemCard = ({ itemObj, setChange }) => {
         setItemName(itemDetails.name);
       } catch (error) {
         console.error('Error fetching item details', error);
-        console.warn('Item details not fetched');
       }
     };
     fetchItemName();

@@ -16,7 +16,7 @@ const RevenueTable = () => {
         const orders = await getClosedOrders();
         setClosedOrders(orders);
       } catch (error) {
-        console.warn('Unable to fetch closed orders');
+        console.error('Unable to fetch closed orders');
       }
     };
 
@@ -36,7 +36,7 @@ const RevenueTable = () => {
       if (payment && payment.label) {
         paymentTypeCounts[payment.label] = (paymentTypeCounts[payment.label] || 0) + 1;
       } else {
-        console.warn('Order with undefined or null paymentType:', order);
+        console.error('Order with undefined or null paymentType:', order);
       }
     });
 
@@ -52,7 +52,7 @@ const RevenueTable = () => {
       if (type && type.label) {
         orderTypeCounts[type.label] = (orderTypeCounts[type.label] || 0) + 1;
       } else {
-        console.warn('Order with undefined or null orderType:', order);
+        console.error('Order with undefined or null orderType:', order);
       }
     });
 

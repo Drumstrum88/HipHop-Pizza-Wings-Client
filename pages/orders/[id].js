@@ -22,7 +22,6 @@ export default function OrderDetails() {
   const fetchOrderDetails = async () => {
     try {
       const res = await getSingleOrder(id);
-      console.warn('Order Details Response:', res);
       setOrderDetails(res);
     } catch (error) {
       console.error('Error fetching order details', error);

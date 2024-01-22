@@ -8,8 +8,6 @@ const getSingleOrderItem = (orderId) => new Promise((resolve, reject) => {
 });
 
 const createOrderItem = (payload) => new Promise((resolve, reject) => {
-  console.warn('Payload:', payload);
-
   fetch('http://localhost:8000/orderitems', {
     method: 'POST',
     headers: {
@@ -17,12 +15,8 @@ const createOrderItem = (payload) => new Promise((resolve, reject) => {
     },
     body: JSON.stringify({ ...payload, quantity: 1 }),
   })
-    .then((response) => {
-      console.warn('Response:', response);
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
-      console.warn('Data:', data);
       resolve(data);
     })
     .catch((error) => {

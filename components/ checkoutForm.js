@@ -48,7 +48,6 @@ const CheckoutForm = ({ orderId }) => {
 
   const handlePaymentTypeChange = (e) => {
     const selectedPaymentTypeId = e.target.value;
-    console.warn('Selected Payment Type ID:', selectedPaymentTypeId);
     const paymentTypeId = Number(selectedPaymentTypeId);
 
     setPaymentType(paymentTypeId);
@@ -80,7 +79,6 @@ const CheckoutForm = ({ orderId }) => {
       total: orderTotal.toFixed(2),
       date: orderDetails.date,
     };
-    console.warn('Checkout Data:', checkoutData);
 
     try {
       const updatedOrder = await updateOrder({

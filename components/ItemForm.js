@@ -36,8 +36,6 @@ const ItemForm = ({
     const selectedItems = formInput
       .filter((entry) => Number.isInteger(entry.quantity) && entry.quantity > 0)
       .map(({ item, quantity }) => ({ item: item.id, quantity }));
-
-    console.warn('Selected Items:', selectedItems);
     handleAddItems(selectedItems);
     setFormInput(initialState);
     handleClose();

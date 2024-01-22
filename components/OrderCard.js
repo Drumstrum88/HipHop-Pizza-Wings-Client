@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { deleteOrder } from './api/orderData';
 
 export default function OrderCard({ orderObj, setChange }) {
-  console.warn('orderObj:', orderObj);
   const deleteThisOrder = () => {
     if (window.confirm('Delete order?')) {
       deleteOrder(orderObj.id).then(() => {
